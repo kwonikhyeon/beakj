@@ -1,37 +1,41 @@
-
 import sys
+sys.setrecursionlimit(10**6)
 
-def check(k,l):
-    if [k+1,l] in p: check(k+1,l)
-    elif [k-1,l] in p: check(k-1,l)
-    elif [k,l+1] in p: check(k,l+1)
-    elif [k,l-1] in p: check(k,l-1)
+def check(y,x):
+    if x < 0 or y < 0 or x > n or y > m:
+        return
+    if p[y][x] == 0:
+        return
 
-    p.remove([k,l])
-'''
-p=[]
-num = int(sys.stdin.readline())
-jirung = [0]*num
-for i in range(num):
-    m, n, c = map(int, sys.stdin.readline().split())
-    for j in range(c):
-        p.append(list(map(int, sys.stdin.readline().split())))
-    for k in range(m):
-        for l in range(n):
-            if [k,l] in p: 
-                #check(k,l)
-                jirung[i] += 1
-    p.clear()
+    p[y][x] == 0
+    check(y,x+1)
+    check(y,x-1)
+    check(y+1,x)
+    check(y-1,x)
 
-for i in range(num): print(jirung[i])
-'''
 
 num = int(sys.stdin.readline())
 jirung = [0]*num
 for i in range(num):
     m, n, c = map(int, sys.stdin.readline().split())
-    p = [[0]*m for i in range(n)]
-    for j in range(c):
-        a,b = int(sys.stdin.readline().split())
+    p = [[0]*m for _ in range(n)]
+    for _ in range(c):
+        a,b = map(int,sys.stdin.readline().split())
         p[b][a] = 1
-    
+
+    for u in range(n):
+        for v in range(m):
+            print(p[u][v], end='')
+        print("")
+
+    print('\n')
+
+    for k in range(n):
+        for l in range(m):
+            if p[k][l] == 1:
+                check(k,l)
+                jirung[i] += 1
+            print(p[k][l], end='')
+        print("")
+
+#print(jirung[i] for i in range(num))
