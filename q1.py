@@ -1,22 +1,20 @@
 def solution(progresses, speeds):
     answer = []
-    c = 0
     while True:
+        c = 0
         if progresses == []: break
         for i in range(len(progresses)):
-            if progresses[i] < 100: progresses[i] = progresses[i] + speeds[i]
-        print(progresses)
+            if progresses[i] < 100: progresses[i] += speeds[i]
         while True:
-            if progresses[0] < 100: break
+            if progresses == [] or progresses[0] < 100: break
             else:
                 del progresses[0]
                 c += 1
-        answer.append(c)
-
+        if c != 0: answer.append(c)
     return answer
 
-p = [93, 30, 55]
-s = [1, 30, 5]
+p = [0,0,0,0]
+s = [10,8,2,15]
 o = []
-solution(p, s)
+print(solution(p, s))
 
